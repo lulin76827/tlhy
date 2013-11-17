@@ -189,6 +189,8 @@ public class AnswerController {
 	public ModelAndView editAnswer(@RequestParam Integer idKey) {
 		ModelAndView mav = new ModelAndView();
 
+		mav.addObject("users", userDAO.findAllUsers());
+		mav.addObject("questions", questionDAO.findAllQuestions());
 		mav.addObject("answer", answerDAO.findAnswerByPrimaryKey(idKey));
 		mav.setViewName("answer/editAnswer.jsp");
 
@@ -220,6 +222,8 @@ public class AnswerController {
 
 		mav.addObject("answer", new Answer());
 		mav.addObject("newFlag", true);
+		mav.addObject("users", userDAO.findAllUsers());
+		mav.addObject("questions", questionDAO.findAllQuestions());
 		mav.setViewName("answer/editAnswer.jsp");
 
 		return mav;

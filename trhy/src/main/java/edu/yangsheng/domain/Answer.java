@@ -65,7 +65,7 @@ public class Answer implements Serializable {
 	 * 
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "create_time", nullable = false)
+	@Column(name = "create_time", nullable = true)
 	@Basic(fetch = FetchType.EAGER)
 	@XmlElement
 	Calendar createTime;

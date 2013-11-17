@@ -29,8 +29,25 @@
 							${answer.id}
 						&nbsp;
 									<form:hidden id="answer_id" path="id"/>
+									<form:hidden id="answer_createTime" path="createTime"/>
 								</c:otherwise>
 							</c:choose>
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
+							<fmt:message key="user.title"/>:
+						</td>
+						<td>
+							<form:select id="answer_user" path="user.id" cssStyle="width:200px;" items="${users }" itemLabel="name" itemValue="id"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
+							<fmt:message key="question.title"/>:
+						</td>
+						<td>
+							<form:select id="answer_question" path="question.id" cssStyle="width:200px;" items="${questions }" itemLabel="questionField" itemValue="id"/>
 						</td>
 					</tr>
 					<tr>
@@ -40,15 +57,6 @@
 						<td>
 							<form:input id="answer_record" path="record" cssStyle="width:300px;"/>
 							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "answer_record",widgetType : "dijit.form.NumberTextBox",widgetAttrs : {promptMessage: "<fmt:message key="answer.record.help"/>", constraints : {places:0}}})); </script>
-						</td>
-					</tr>
-					<tr>
-						<td class="label" valign="top">
-							<fmt:message key="answer.createtime.title"/>:
-						</td>
-						<td>
-							<input id="answer_createTime" name="createTime" type="text" value="<fmt:formatDate value="${answer.createTime.time}" pattern="MM/dd/yyyy h:mm a"/>" style="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "answer_createTime",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="navigation.dateTime.title"/>"}})); </script>
 						</td>
 					</tr>
 				</tbody>
