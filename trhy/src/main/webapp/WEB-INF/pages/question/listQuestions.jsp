@@ -18,6 +18,7 @@
 				<tr>
 					<th class="thead">&nbsp;</th>
 					<th class="thead"><fmt:message key="question.questionfield.title"/></th>
+					<th class="thead"><fmt:message key="question.category.title"/></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -39,6 +40,11 @@
 					<td nowrap="nowrap" class="tabletd">
 						
 							${current.questionField}
+						&nbsp;
+					</td>
+					<td nowrap="nowrap" class="tabletd">
+						
+							${current.category.categoryField}
 						&nbsp;
 					</td>
 				</tr>

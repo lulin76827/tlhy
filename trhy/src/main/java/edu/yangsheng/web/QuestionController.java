@@ -1,29 +1,25 @@
 package edu.yangsheng.web;
 
+import java.util.Set;
+
 import edu.yangsheng.dao.AnswerDAO;
 import edu.yangsheng.dao.CategoryDAO;
 import edu.yangsheng.dao.QuestionDAO;
-
 import edu.yangsheng.domain.Answer;
 import edu.yangsheng.domain.Category;
 import edu.yangsheng.domain.Question;
-
 import edu.yangsheng.service.QuestionService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.WebDataBinder;
-
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -68,6 +64,7 @@ public class QuestionController {
 	 */
 	@RequestMapping("/newQuestionCategory")
 	public ModelAndView newQuestionCategory(@RequestParam Integer question_id) {
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("question_id", question_id);
 		mav.addObject("category", new Category());
@@ -129,10 +126,12 @@ public class QuestionController {
 	 */
 	@RequestMapping("/newQuestion")
 	public ModelAndView newQuestion() {
+		Set<Category> categorys = categoryDAO.findAllCategorys();
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("question", new Question());
 		mav.addObject("newFlag", true);
+		mav.addObject("categorys", categorys);
 		mav.setViewName("question/editQuestion.jsp");
 
 		return mav;
@@ -220,8 +219,9 @@ public class QuestionController {
 	 */
 	@RequestMapping("/editQuestion")
 	public ModelAndView editQuestion(@RequestParam Integer idKey) {
+		Set<Category> categorys = categoryDAO.findAllCategorys();
 		ModelAndView mav = new ModelAndView();
-
+		mav.addObject("categorys", categorys);
 		mav.addObject("question", questionDAO.findQuestionByPrimaryKey(idKey));
 		mav.setViewName("question/editQuestion.jsp");
 
