@@ -10,7 +10,7 @@
 	<div id="lb"><div id="rb"><div id="bb"><div id="blc">
 	<div id="brc"><div id="tb"><div id="tlc"><div id="trc">
 	<div id="content">
-		<h1>Manage <fmt:message key="question.title"/>s</h1>
+		<h1>管理<fmt:message key="question.title"/></h1>
 		<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/newQuestion"><span><img src="${pageContext.request.contextPath}/images/icons/new.gif" /><fmt:message key="navigation.new"/> <fmt:message key="question.title"/></span></a></div>
 		<div id="tablewrapper">
 		<table id="listTable" cellpadding="0" cellspacing="0">

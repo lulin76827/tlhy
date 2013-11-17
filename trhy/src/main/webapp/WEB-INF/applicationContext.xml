@@ -18,8 +18,8 @@
 	<!-- ******************************************************************** -->
 	<!-- Include context files from different layers -->
 	<!-- ******************************************************************** -->
-	<import resource="classpath:tlhy-security-context.xml" />
-	<import resource="classpath:tlhy-service-context.xml" />
-	<import resource="classpath:tlhy-dao-context.xml" />
+	<import resource="classpath:trhy-security-context.xml" />
+	<import resource="classpath:trhy-service-context.xml" />
+	<import resource="classpath:trhy-dao-context.xml" />
 	
 </beans>

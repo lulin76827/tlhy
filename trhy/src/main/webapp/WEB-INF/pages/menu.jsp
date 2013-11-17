@@ -5,7 +5,7 @@
 	<div id="lb"><div id="rb"><div id="bb"><div id="blc">
 	<div id="brc"><div id="tb"><div id="tlc"><div id="trc">
 		<div id="content">
-			<h1>Spring MVC</h1>
+			<h1>养生堂</h1>
 			<p class="line">&nbsp;</p>
 			<jsp:include page="/WEB-INF/pages/user/menu.jsp" />
 <jsp:include page="/WEB-INF/pages/category/menu.jsp" />
