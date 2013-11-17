@@ -44,7 +44,7 @@
 					</tr>
 					<tr>
 						<td class="label" valign="top">
-							<fmt:message key="question.category.title"/>:
+							<fmt:message key="category.title"/>:
 						</td>
 						<td>
 							<form:select id="question_category" path="category.id" cssStyle="width:200px;" items="${categorys }" itemLabel="categoryField" itemValue="id"/>

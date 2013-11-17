@@ -196,6 +196,7 @@ public class MedicineController {
 
 		mav.addObject("medicine", new Medicine());
 		mav.addObject("newFlag", true);
+		mav.addObject("categorys", categoryDAO.findAllCategorys());
 		mav.setViewName("medicine/editMedicine.jsp");
 
 		return mav;
@@ -244,7 +245,7 @@ public class MedicineController {
 	@RequestMapping("/editMedicine")
 	public ModelAndView editMedicine(@RequestParam Integer idKey) {
 		ModelAndView mav = new ModelAndView();
-
+		mav.addObject("categorys", categoryDAO.findAllCategorys());
 		mav.addObject("medicine", medicineDAO.findMedicineByPrimaryKey(idKey));
 		mav.setViewName("medicine/editMedicine.jsp");
 

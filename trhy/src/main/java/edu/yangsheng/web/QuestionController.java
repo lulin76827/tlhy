@@ -1,15 +1,5 @@
 package edu.yangsheng.web;
 
-import java.util.Set;
-
-import edu.yangsheng.dao.AnswerDAO;
-import edu.yangsheng.dao.CategoryDAO;
-import edu.yangsheng.dao.QuestionDAO;
-import edu.yangsheng.domain.Answer;
-import edu.yangsheng.domain.Category;
-import edu.yangsheng.domain.Question;
-import edu.yangsheng.service.QuestionService;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,6 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import edu.yangsheng.dao.AnswerDAO;
+import edu.yangsheng.dao.CategoryDAO;
+import edu.yangsheng.dao.QuestionDAO;
+import edu.yangsheng.domain.Answer;
+import edu.yangsheng.domain.Category;
+import edu.yangsheng.domain.Question;
+import edu.yangsheng.service.QuestionService;
 
 /**
  * Spring MVC controller that handles CRUD requests for Question entities
@@ -126,12 +124,11 @@ public class QuestionController {
 	 */
 	@RequestMapping("/newQuestion")
 	public ModelAndView newQuestion() {
-		Set<Category> categorys = categoryDAO.findAllCategorys();
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("question", new Question());
 		mav.addObject("newFlag", true);
-		mav.addObject("categorys", categorys);
+		mav.addObject("categorys", categoryDAO.findAllCategorys());
 		mav.setViewName("question/editQuestion.jsp");
 
 		return mav;
@@ -219,9 +216,8 @@ public class QuestionController {
 	 */
 	@RequestMapping("/editQuestion")
 	public ModelAndView editQuestion(@RequestParam Integer idKey) {
-		Set<Category> categorys = categoryDAO.findAllCategorys();
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("categorys", categorys);
+		mav.addObject("categorys", categoryDAO.findAllCategorys());
 		mav.addObject("question", questionDAO.findQuestionByPrimaryKey(idKey));
 		mav.setViewName("question/editQuestion.jsp");
 

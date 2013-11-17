@@ -20,6 +20,7 @@
 					<th class="thead"><fmt:message key="medicine.describ.title"/></th>
 					<th class="thead"><fmt:message key="medicine.medicinefield.title"/></th>
 					<th class="thead"><fmt:message key="medicine.type.title"/></th>
+					<th class="thead"><fmt:message key="category.title"/></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -51,6 +52,11 @@
 					<td nowrap="nowrap" class="tabletd">
 						
 							${current.type}
+						&nbsp;
+					</td>
+					<td nowrap="nowrap" class="tabletd">
+						
+							${current.category.categoryField}
 						&nbsp;
 					</td>
 				</tr>
