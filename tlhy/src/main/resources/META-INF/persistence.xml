@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+	
+	
+		<persistence-unit name="com_mysql_jdbc_Driver"  >
+			<description>generated-persistence-unit</description>
+					<provider>org.hibernate.ejb.HibernatePersistence</provider>
+      			<class>edu.yangsheng.domain.Medicine</class>
+      			<class>edu.yangsheng.domain.Category</class>
+      			<class>edu.yangsheng.domain.Answer</class>
+      			<class>edu.yangsheng.domain.User</class>
+      			<class>edu.yangsheng.domain.UserCategory</class>
+      			<class>edu.yangsheng.domain.Pathogenesis</class>
+      			<class>edu.yangsheng.domain.Account</class>
+      			<class>edu.yangsheng.domain.Question</class>
+      			<class>edu.yangsheng.domain.MedicineSymptom</class>
+      			<class>edu.yangsheng.domain.Symptom</class>
+   			<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		</persistence-unit>
+
+	
+</persistence>
