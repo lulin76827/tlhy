@@ -172,7 +172,7 @@ public class PathogenesisController {
 	@RequestMapping("/editPathogenesis")
 	public ModelAndView editPathogenesis(@RequestParam Integer idKey) {
 		ModelAndView mav = new ModelAndView();
-
+		mav.addObject("categorys", categoryDAO.findAllCategorys());
 		mav.addObject("pathogenesis", pathogenesisDAO.findPathogenesisByPrimaryKey(idKey));
 		mav.setViewName("pathogenesis/editPathogenesis.jsp");
 
@@ -286,6 +286,7 @@ public class PathogenesisController {
 
 		mav.addObject("pathogenesis", new Pathogenesis());
 		mav.addObject("newFlag", true);
+		mav.addObject("categorys", categoryDAO.findAllCategorys());
 		mav.setViewName("pathogenesis/editPathogenesis.jsp");
 
 		return mav;

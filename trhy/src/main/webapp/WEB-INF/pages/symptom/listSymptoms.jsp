@@ -21,6 +21,7 @@
 					<th class="thead"><fmt:message key="symptom.symptomfield.title"/></th>
 					<th class="thead"><fmt:message key="symptom.normal.title"/></th>
 					<th class="thead"><fmt:message key="symptom.type.title"/></th>
+					<th class="thead"><fmt:message key="category.title"/></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -57,6 +58,11 @@
 					<td nowrap="nowrap" class="tabletd">
 						
 							${current.type}
+						&nbsp;
+					</td>
+					<td nowrap="nowrap" class="tabletd">
+						
+							${current.category.categoryField}
 						&nbsp;
 					</td>
 				</tr>

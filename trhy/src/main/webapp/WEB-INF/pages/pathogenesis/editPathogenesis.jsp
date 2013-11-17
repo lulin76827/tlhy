@@ -60,6 +60,14 @@
 							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "pathogenesis_type",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="pathogenesis.type.help"/>"}})); </script>
 						</td>
 					</tr>
+					<tr>
+						<td class="label" valign="top">
+							<fmt:message key="category.title"/>:
+						</td>
+						<td>
+							<form:select id="pathogenesis_category" path="category.id" cssStyle="width:200px;" items="${categorys }" itemLabel="categoryField" itemValue="id"/>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 			<span class="inputbutton"><input class="savebutton" id="save" type="submit" value="<fmt:message key="navigation.save"/>"/></span>

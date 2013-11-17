@@ -318,6 +318,7 @@ public class SymptomController {
 	public ModelAndView editSymptom(@RequestParam Integer idKey) {
 		ModelAndView mav = new ModelAndView();
 
+		mav.addObject("categorys", categoryDAO.findAllCategorys());
 		mav.addObject("symptom", symptomDAO.findSymptomByPrimaryKey(idKey));
 		mav.setViewName("symptom/editSymptom.jsp");
 
@@ -349,6 +350,7 @@ public class SymptomController {
 
 		mav.addObject("symptom", new Symptom());
 		mav.addObject("newFlag", true);
+		mav.addObject("categorys", categoryDAO.findAllCategorys());
 		mav.setViewName("symptom/editSymptom.jsp");
 
 		return mav;

@@ -19,6 +19,7 @@
 					<th class="thead">&nbsp;</th>
 					<th class="thead"><fmt:message key="usercategory.score.title"/></th>
 					<th class="thead"><fmt:message key="usercategory.createtime.title"/></th>
+					<th class="thead"><fmt:message key="category.title"/></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -45,6 +46,11 @@
 					<td nowrap="nowrap" class="tabletd">
 						
 							<fmt:formatDate dateStyle="short" type="both" value="${current.createTime.time}"/>
+						&nbsp;
+					</td>
+					<td nowrap="nowrap" class="tabletd">
+						
+							${current.category.categoryField}
 						&nbsp;
 					</td>
 				</tr>

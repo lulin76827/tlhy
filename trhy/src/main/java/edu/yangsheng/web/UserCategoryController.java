@@ -122,6 +122,7 @@ public class UserCategoryController {
 	public ModelAndView editUserCategory(@RequestParam Integer idKey) {
 		ModelAndView mav = new ModelAndView();
 
+		mav.addObject("categorys", categoryDAO.findAllCategorys());
 		mav.addObject("usercategory", userCategoryDAO.findUserCategoryByPrimaryKey(idKey));
 		mav.setViewName("usercategory/editUserCategory.jsp");
 
@@ -207,6 +208,7 @@ public class UserCategoryController {
 
 		mav.addObject("usercategory", new UserCategory());
 		mav.addObject("newFlag", true);
+		mav.addObject("categorys", categoryDAO.findAllCategorys());
 		mav.setViewName("usercategory/editUserCategory.jsp");
 
 		return mav;
