@@ -18,6 +18,7 @@ import edu.yangsheng.dao.QuestionDAO;
 import edu.yangsheng.domain.Answer;
 import edu.yangsheng.domain.Category;
 import edu.yangsheng.domain.Question;
+import edu.yangsheng.domain.Question.QueryType;
 import edu.yangsheng.service.QuestionService;
 
 /**
@@ -128,6 +129,7 @@ public class QuestionController {
 
 		mav.addObject("question", new Question());
 		mav.addObject("newFlag", true);
+		mav.addObject("questionTypes", QueryType.values());
 		mav.addObject("categorys", categoryDAO.findAllCategorys());
 		mav.setViewName("question/editQuestion.jsp");
 
@@ -217,6 +219,8 @@ public class QuestionController {
 	@RequestMapping("/editQuestion")
 	public ModelAndView editQuestion(@RequestParam Integer idKey) {
 		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("questionTypes", QueryType.values());
 		mav.addObject("categorys", categoryDAO.findAllCategorys());
 		mav.addObject("question", questionDAO.findQuestionByPrimaryKey(idKey));
 		mav.setViewName("question/editQuestion.jsp");

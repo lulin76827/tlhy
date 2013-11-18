@@ -15,24 +15,18 @@
 		<form:form action="${pageContext.request.contextPath}/saveUserCategoryUser" method="POST" modelAttribute="user">
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<tbody>
-					<tr>
-						<td class="label" valign="top">
-							<fmt:message key="user.id.title"/>:
-						</td>
-						<td>
-							<c:choose>
-								<c:when test='${newFlag}' >
-							<form:input id="user_id" path="id" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "user_id",widgetType : "dijit.form.NumberTextBox",widgetAttrs : {promptMessage: "<fmt:message key="user.id.help"/>", constraints : {places:0}}})); </script>
-								</c:when>
-								<c:otherwise>
-							${user.id}
-						&nbsp;
-									<form:hidden id="user_id" path="id"/>
-								</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
+					<c:if test="${not newFlag}">
+						<tr>
+							<td class="label" valign="top">
+								<fmt:message key="user.id.title"/>:
+							</td>
+							<td>
+								${user.id}
+							&nbsp;
+								<form:hidden id="user_id" path="id"/>
+							</td>
+						</tr>
+					</c:if>
 					<tr>
 						<td class="label" valign="top">
 							<fmt:message key="user.birthday.title"/>:

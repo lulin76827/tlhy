@@ -39,12 +39,29 @@ import javax.xml.bind.annotation.XmlType;
 		@NamedQuery(name = "findMedicineByPrimaryKey", query = "select myMedicine from Medicine myMedicine where myMedicine.id = ?1"),
 		@NamedQuery(name = "findMedicineByType", query = "select myMedicine from Medicine myMedicine where myMedicine.type = ?1"),
 		@NamedQuery(name = "findMedicineByTypeContaining", query = "select myMedicine from Medicine myMedicine where myMedicine.type like ?1") })
-@Table(catalog = "tlhy", name = "medicine")
+@Table(catalog = "trhy", name = "medicine")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "tlhy/edu/yangsheng/domain", name = "Medicine")
-@XmlRootElement(namespace = "tlhy/edu/yangsheng/domain")
+@XmlType(namespace = "trhy/edu/yangsheng/domain", name = "Medicine")
+@XmlRootElement(namespace = "trhy/edu/yangsheng/domain")
 public class Medicine implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	public static enum MedicineType {
+		spirit("精神上的"), life("生活上的"), sport("运动"), diet("饮食"), other("其他");
+		String label;
+
+		private MedicineType(String label) {
+			this.label = label;
+		}
+
+		public String getLabel() {
+			return label;
+		}
+
+		public String getName() {
+			return this.name();
+		}
+	}
 
 	/**
 	 * 编号
@@ -80,10 +97,10 @@ public class Medicine implements Serializable {
 	 * 
 	 */
 
-	@Column(name = "type", length = 7)
+	@Column(name = "type")
 	@Basic(fetch = FetchType.EAGER)
 	@XmlElement
-	String type;
+	MedicineType type;
 
 	/**
 	 */
@@ -149,7 +166,7 @@ public class Medicine implements Serializable {
 	 * 药物类型，是精神上的、生活上的、运动和饮食等
 	 * 
 	 */
-	public void setType(String type) {
+	public void setType(MedicineType type) {
 		this.type = type;
 	}
 
@@ -157,7 +174,7 @@ public class Medicine implements Serializable {
 	 * 药物类型，是精神上的、生活上的、运动和饮食等
 	 * 
 	 */
-	public String getType() {
+	public MedicineType getType() {
 		return this.type;
 	}
 
@@ -195,7 +212,7 @@ public class Medicine implements Serializable {
 
 	/**
 	 * Copies the contents of the specified bean into this bean.
-	 *
+	 * 
 	 */
 	public void copy(Medicine that) {
 		setId(that.getId());
@@ -203,12 +220,13 @@ public class Medicine implements Serializable {
 		setMedicineField(that.getMedicineField());
 		setType(that.getType());
 		setCategory(that.getCategory());
-		setMedicineSymptoms(new java.util.LinkedHashSet<edu.yangsheng.domain.MedicineSymptom>(that.getMedicineSymptoms()));
+		setMedicineSymptoms(new java.util.LinkedHashSet<edu.yangsheng.domain.MedicineSymptom>(
+				that.getMedicineSymptoms()));
 	}
 
 	/**
 	 * Returns a textual representation of a bean.
-	 *
+	 * 
 	 */
 	public String toString() {
 
@@ -240,7 +258,8 @@ public class Medicine implements Serializable {
 		if (!(obj instanceof Medicine))
 			return false;
 		Medicine equalCheck = (Medicine) obj;
-		if ((id == null && equalCheck.id != null) || (id != null && equalCheck.id == null))
+		if ((id == null && equalCheck.id != null)
+				|| (id != null && equalCheck.id == null))
 			return false;
 		if (id != null && !id.equals(equalCheck.id))
 			return false;

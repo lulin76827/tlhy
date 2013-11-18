@@ -34,9 +34,9 @@ import javax.xml.bind.annotation.XmlType;
 		@NamedQuery(name = "findAccountByUsername", query = "select myAccount from Account myAccount where myAccount.username = ?1"),
 		@NamedQuery(name = "findAccountByUsernameContaining", query = "select myAccount from Account myAccount where myAccount.username like ?1"),
 		@NamedQuery(name = "findAllAccounts", query = "select myAccount from Account myAccount") })
-@Table(catalog = "tlhy", name = "account")
+@Table(catalog = "trhy", name = "account")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "tlhy/edu/yangsheng/domain", name = "Account")
+@XmlType(namespace = "trhy/edu/yangsheng/domain", name = "Account")
 public class Account implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -49,10 +49,10 @@ import javax.xml.bind.annotation.XmlType;
 		@NamedQuery(name = "findUserByPrimaryKey", query = "select myUser from User myUser where myUser.id = ?1"),
 		@NamedQuery(name = "findUserBySex", query = "select myUser from User myUser where myUser.sex = ?1"),
 		@NamedQuery(name = "findUserBySleepTime", query = "select myUser from User myUser where myUser.sleepTime = ?1") })
-@Table(catalog = "tlhy", name = "user")
+@Table(catalog = "trhy", name = "user")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "tlhy/edu/yangsheng/domain", name = "User")
-@XmlRootElement(namespace = "tlhy/edu/yangsheng/domain")
+@XmlType(namespace = "trhy/edu/yangsheng/domain", name = "User")
+@XmlRootElement(namespace = "trhy/edu/yangsheng/domain")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 

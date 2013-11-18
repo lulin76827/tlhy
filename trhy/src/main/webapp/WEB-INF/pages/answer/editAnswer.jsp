@@ -15,25 +15,18 @@
 		<form:form action="${pageContext.request.contextPath}/saveAnswer" method="POST" modelAttribute="answer">
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<tbody>
-					<tr>
-						<td class="label" valign="top">
-							<fmt:message key="answer.id.title"/>:
-						</td>
-						<td>
-							<c:choose>
-								<c:when test='${newFlag}' >
-							<form:input id="answer_id" path="id" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "answer_id",widgetType : "dijit.form.NumberTextBox",widgetAttrs : {promptMessage: "<fmt:message key="answer.id.help"/>", constraints : {places:0}}})); </script>
-								</c:when>
-								<c:otherwise>
-							${answer.id}
-						&nbsp;
-									<form:hidden id="answer_id" path="id"/>
-									<form:hidden id="answer_createTime" path="createTime"/>
-								</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
+					<c:if test="${not newFlag}">
+						<tr>
+							<td class="label" valign="top">
+								<fmt:message key="answer.id.title"/>:
+							</td>
+							<td>
+								${answer.id}
+							&nbsp;
+								<form:hidden id="answer_id" path="id"/>
+							</td>
+						</tr>
+					</c:if>
 					<tr>
 						<td class="label" valign="top">
 							<fmt:message key="user.title"/>:
@@ -47,7 +40,7 @@
 							<fmt:message key="question.title"/>:
 						</td>
 						<td>
-							<form:select id="answer_question" path="question.id" cssStyle="width:200px;" items="${questions }" itemLabel="questionField" itemValue="id"/>
+							<form:select id="answer_question" path="question.id" cssStyle="width:300px;" items="${questions }" itemLabel="label" itemValue="id"/>
 						</td>
 					</tr>
 					<tr>

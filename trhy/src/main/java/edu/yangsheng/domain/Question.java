@@ -30,17 +30,35 @@ import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @NamedQueries({
-		@NamedQuery(name = "findAllQuestions", query = "select myQuestion from Question myQuestion"),
+		@NamedQuery(name = "findAllQuestions", query = "select myQuestion from Question myQuestion order by id desc"),
 		@NamedQuery(name = "findQuestionById", query = "select myQuestion from Question myQuestion where myQuestion.id = ?1"),
 		@NamedQuery(name = "findQuestionByPrimaryKey", query = "select myQuestion from Question myQuestion where myQuestion.id = ?1"),
 		@NamedQuery(name = "findQuestionByQuestionField", query = "select myQuestion from Question myQuestion where myQuestion.questionField = ?1"),
 		@NamedQuery(name = "findQuestionByQuestionFieldContaining", query = "select myQuestion from Question myQuestion where myQuestion.questionField like ?1") })
-@Table(catalog = "tlhy", name = "question")
+@Table(catalog = "trhy", name = "question")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "tlhy/edu/yangsheng/domain", name = "Question")
-@XmlRootElement(namespace = "tlhy/edu/yangsheng/domain")
+@XmlType(namespace = "trhy/edu/yangsheng/domain", name = "Question")
+@XmlRootElement(namespace = "trhy/edu/yangsheng/domain")
 public class Question implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	public static enum QueryType {
+		appearance("身体结构与外观"), metabolism("新陈代谢"), psychological("心理特征");
+		String label;
+
+		private QueryType(String label) {
+			this.label = label;
+		}
+
+		public String getLabel() {
+			return label;
+		}
+
+		public String getName() {
+			return this.name();
+		}
+
+	}
 
 	/**
 	 * 编号
@@ -53,6 +71,22 @@ public class Question implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@XmlElement
 	Integer id;
+	/**
+	 * 问题类型，是外观、新陈代谢或者心理特征
+	 */
+	@Column(name = "type")
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+	QueryType type;
+	/**
+	 * 所属项目
+	 * 
+	 */
+
+	@Column(name = "item", length = 200, nullable = false)
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+	String questionItem;
 	/**
 	 * 问题
 	 * 
@@ -92,6 +126,42 @@ public class Question implements Serializable {
 	}
 
 	/**
+	 * 问题类型，是外观、新陈代谢或者心理特征
+	 * 
+	 * @return
+	 */
+	public QueryType getType() {
+		return type;
+	}
+
+	/**
+	 * 问题类型，是外观、新陈代谢或者心理特征
+	 * 
+	 * @param type
+	 */
+	public void setType(QueryType type) {
+		this.type = type;
+	}
+
+	/**
+	 * 所属项目
+	 * 
+	 * @return
+	 */
+	public String getQuestionItem() {
+		return questionItem;
+	}
+
+	/**
+	 * 所属项目
+	 * 
+	 * @param questionItem
+	 */
+	public void setQuestionItem(String questionItem) {
+		this.questionItem = questionItem;
+	}
+
+	/**
 	 * 问题
 	 * 
 	 */
@@ -105,6 +175,15 @@ public class Question implements Serializable {
 	 */
 	public String getQuestionField() {
 		return this.questionField;
+	}
+
+	/**
+	 * 问题标签
+	 * 
+	 * @return
+	 */
+	public String getLabel() {
+		return this.type.label + "\t" + this.questionItem + "\t" + this.questionField;
 	}
 
 	/**
@@ -141,18 +220,21 @@ public class Question implements Serializable {
 
 	/**
 	 * Copies the contents of the specified bean into this bean.
-	 *
+	 * 
 	 */
 	public void copy(Question that) {
 		setId(that.getId());
+		setType(that.getType());
+		setQuestionItem(that.getQuestionItem());
 		setQuestionField(that.getQuestionField());
 		setCategory(that.getCategory());
-		setAnswers(new java.util.LinkedHashSet<edu.yangsheng.domain.Answer>(that.getAnswers()));
+		setAnswers(new java.util.LinkedHashSet<edu.yangsheng.domain.Answer>(
+				that.getAnswers()));
 	}
 
 	/**
 	 * Returns a textual representation of a bean.
-	 *
+	 * 
 	 */
 	public String toString() {
 
@@ -182,7 +264,8 @@ public class Question implements Serializable {
 		if (!(obj instanceof Question))
 			return false;
 		Question equalCheck = (Question) obj;
-		if ((id == null && equalCheck.id != null) || (id != null && equalCheck.id == null))
+		if ((id == null && equalCheck.id != null)
+				|| (id != null && equalCheck.id == null))
 			return false;
 		if (id != null && !id.equals(equalCheck.id))
 			return false;

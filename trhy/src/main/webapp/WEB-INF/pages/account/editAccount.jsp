@@ -15,24 +15,18 @@
 		<form:form action="${pageContext.request.contextPath}/saveAccount" method="POST" modelAttribute="account">
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<tbody>
-					<tr>
-						<td class="label" valign="top">
-							<fmt:message key="account.id.title"/>:
-						</td>
-						<td>
-							<c:choose>
-								<c:when test='${newFlag}' >
-							<form:input id="account_id" path="id" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "account_id",widgetType : "dijit.form.NumberTextBox",widgetAttrs : {promptMessage: "<fmt:message key="account.id.help"/>", constraints : {places:0}}})); </script>
-								</c:when>
-								<c:otherwise>
-							${account.id}
-						&nbsp;
-									<form:hidden id="account_id" path="id"/>
-								</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
+					<c:if test="${not newFlag}">
+						<tr>
+							<td class="label" valign="top">
+								<fmt:message key="account.id.title"/>:
+							</td>
+							<td>
+								${account.id}
+							&nbsp;
+								<form:hidden id="account_id" path="id"/>
+							</td>
+						</tr>
+					</c:if>
 					<tr>
 						<td class="label" valign="top">
 							<fmt:message key="account.administrator.title"/>:
@@ -44,20 +38,20 @@
 					</tr>
 					<tr>
 						<td class="label" valign="top">
-							<fmt:message key="account.password.title"/>:
-						</td>
-						<td>
-							<form:input id="account_password" path="password" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "account_password",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="account.password.help"/>"}})); </script>
-						</td>
-					</tr>
-					<tr>
-						<td class="label" valign="top">
 							<fmt:message key="account.username.title"/>:
 						</td>
 						<td>
 							<form:input id="account_username" path="username" cssStyle="width:300px;"/>
 							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "account_username",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="account.username.help"/>"}})); </script>
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
+							<fmt:message key="account.password.title"/>:
+						</td>
+						<td>
+							<form:input id="account_password" path="password" cssStyle="width:300px;"/>
+							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "account_password",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="account.password.help"/>"}})); </script>
 						</td>
 					</tr>
 				</tbody>

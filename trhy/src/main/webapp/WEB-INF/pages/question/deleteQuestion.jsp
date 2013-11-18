@@ -10,7 +10,7 @@
 	<div id="lb"><div id="rb"><div id="bb"><div id="blc">
 	<div id="brc"><div id="tb"><div id="tlc"><div id="trc">
 		<div id="content">
-			<h1><fmt:message key="question.title"/> Details</h1>
+			<h1><fmt:message key="question.title"/>详情</h1>
 			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/indexQuestion"><span><img src="images/icons/back.gif" /><fmt:message key="navigation.back"/></span></a></div>
 		
 			<table cellpadding="0" cellspacing="0" id="viewTable">

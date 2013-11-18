@@ -34,9 +34,9 @@ import javax.xml.bind.annotation.XmlType;
 		@NamedQuery(name = "findAnswerById", query = "select myAnswer from Answer myAnswer where myAnswer.id = ?1"),
 		@NamedQuery(name = "findAnswerByPrimaryKey", query = "select myAnswer from Answer myAnswer where myAnswer.id = ?1"),
 		@NamedQuery(name = "findAnswerByRecord", query = "select myAnswer from Answer myAnswer where myAnswer.record = ?1") })
-@Table(catalog = "tlhy", name = "answer")
+@Table(catalog = "trhy", name = "answer")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "tlhy/edu/yangsheng/domain", name = "Answer")
+@XmlType(namespace = "trhy/edu/yangsheng/domain", name = "Answer")
 public class Answer implements Serializable {
 	private static final long serialVersionUID = 1L;
 

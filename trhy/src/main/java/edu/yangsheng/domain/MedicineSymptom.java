@@ -29,9 +29,9 @@ import javax.xml.bind.annotation.XmlType;
 		@NamedQuery(name = "findAllMedicineSymptoms", query = "select myMedicineSymptom from MedicineSymptom myMedicineSymptom"),
 		@NamedQuery(name = "findMedicineSymptomById", query = "select myMedicineSymptom from MedicineSymptom myMedicineSymptom where myMedicineSymptom.id = ?1"),
 		@NamedQuery(name = "findMedicineSymptomByPrimaryKey", query = "select myMedicineSymptom from MedicineSymptom myMedicineSymptom where myMedicineSymptom.id = ?1") })
-@Table(catalog = "tlhy", name = "medicine_symptom")
+@Table(catalog = "trhy", name = "medicine_symptom")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "tlhy/edu/yangsheng/domain", name = "MedicineSymptom")
+@XmlType(namespace = "trhy/edu/yangsheng/domain", name = "MedicineSymptom")
 public class MedicineSymptom implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -33,10 +33,10 @@ import javax.xml.bind.annotation.XmlType;
 		@NamedQuery(name = "findCategoryByDescribContaining", query = "select myCategory from Category myCategory where myCategory.describ like ?1"),
 		@NamedQuery(name = "findCategoryById", query = "select myCategory from Category myCategory where myCategory.id = ?1"),
 		@NamedQuery(name = "findCategoryByPrimaryKey", query = "select myCategory from Category myCategory where myCategory.id = ?1") })
-@Table(catalog = "tlhy", name = "category")
+@Table(catalog = "trhy", name = "category")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "tlhy/edu/yangsheng/domain", name = "Category")
-@XmlRootElement(namespace = "tlhy/edu/yangsheng/domain")
+@XmlType(namespace = "trhy/edu/yangsheng/domain", name = "Category")
+@XmlRootElement(namespace = "trhy/edu/yangsheng/domain")
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -15,22 +15,33 @@
 		<form:form action="${pageContext.request.contextPath}/saveQuestion" method="POST" modelAttribute="question">
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<tbody>
+					<c:if test="${not newFlag}">
+						<tr>
+							<td class="label" valign="top">
+								<fmt:message key="question.id.title"/>:
+							</td>
+							<td>
+								${question.id}
+							&nbsp;
+								<form:hidden id="question_id" path="id"/>
+							</td>
+						</tr>
+					</c:if>
 					<tr>
 						<td class="label" valign="top">
-							<fmt:message key="question.id.title"/>:
+							<fmt:message key="question.type.title"/>:
 						</td>
 						<td>
-							<c:choose>
-								<c:when test='${newFlag}' >
-							<form:input id="question_id" path="id" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "question_id",widgetType : "dijit.form.NumberTextBox",widgetAttrs : {promptMessage: "<fmt:message key="question.id.help"/>", constraints : {places:0}}})); </script>
-								</c:when>
-								<c:otherwise>
-							${question.id}
-						&nbsp;
-									<form:hidden id="question_id" path="id"/>
-								</c:otherwise>
-							</c:choose>
+							<form:select id="question_type" path="type" cssStyle="width:200px;" items="${questionTypes }" itemLabel="label" itemValue="name"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
+							<fmt:message key="question.questionItem.title"/>:
+						</td>
+						<td>
+							<form:input id="question_questionItem" path="questionItem" cssStyle="width:300px;"/>
+							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "question_questionItem",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="question.questionItem.help"/>"}})); </script>
 						</td>
 					</tr>
 					<tr>

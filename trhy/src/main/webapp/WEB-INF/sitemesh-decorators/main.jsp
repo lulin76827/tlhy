@@ -26,7 +26,7 @@
 		<link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.gif" />
 		<decorator:head />
     </head>
-	<body class="tundra spring">
+	<body class="tundra spring" bgcolor="#FFFFFA">
 		<div id="wrapper">
 			<jsp:include page="/WEB-INF/sitemesh-common/header.jsp" />
 		    <% if (!((HttpServletRequest)pageContext.getRequest()).getServletPath().equals("/index.jsp")){ %>

@@ -26,6 +26,10 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 /**
+ * 症状
+ * 
+ * @author Administrator
+ * 
  */
 
 @Entity
@@ -40,12 +44,29 @@ import javax.xml.bind.annotation.XmlType;
 		@NamedQuery(name = "findSymptomBySymptomFieldContaining", query = "select mySymptom from Symptom mySymptom where mySymptom.symptomField like ?1"),
 		@NamedQuery(name = "findSymptomByType", query = "select mySymptom from Symptom mySymptom where mySymptom.type = ?1"),
 		@NamedQuery(name = "findSymptomByTypeContaining", query = "select mySymptom from Symptom mySymptom where mySymptom.type like ?1") })
-@Table(catalog = "tlhy", name = "symptom")
+@Table(catalog = "trhy", name = "symptom")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "tlhy/edu/yangsheng/domain", name = "Symptom")
-@XmlRootElement(namespace = "tlhy/edu/yangsheng/domain")
+@XmlType(namespace = "trhy/edu/yangsheng/domain", name = "Symptom")
+@XmlRootElement(namespace = "trhy/edu/yangsheng/domain")
 public class Symptom implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	public static enum SymptomType {
+		spirit("精神上的"), action("行动上的"), body("身体上的"), other("其他");
+		String label;
+
+		private SymptomType(String label) {
+			this.label = label;
+		}
+
+		public String getLabel() {
+			return label;
+		}
+
+		public String getName() {
+			return this.name();
+		}
+	}
 
 	/**
 	 * 编号
@@ -93,7 +114,7 @@ public class Symptom implements Serializable {
 	@Column(name = "type", length = 7, nullable = false)
 	@Basic(fetch = FetchType.EAGER)
 	@XmlElement
-	String type;
+	SymptomType type;
 
 	/**
 	 */
@@ -175,7 +196,7 @@ public class Symptom implements Serializable {
 	 * 症状类型，是精神上的、行动上的还是身体上的
 	 * 
 	 */
-	public void setType(String type) {
+	public void setType(SymptomType type) {
 		this.type = type;
 	}
 
@@ -183,7 +204,7 @@ public class Symptom implements Serializable {
 	 * 症状类型，是精神上的、行动上的还是身体上的
 	 * 
 	 */
-	public String getType() {
+	public SymptomType getType() {
 		return this.type;
 	}
 
@@ -221,7 +242,7 @@ public class Symptom implements Serializable {
 
 	/**
 	 * Copies the contents of the specified bean into this bean.
-	 *
+	 * 
 	 */
 	public void copy(Symptom that) {
 		setId(that.getId());
@@ -230,12 +251,13 @@ public class Symptom implements Serializable {
 		setNormal(that.getNormal());
 		setType(that.getType());
 		setCategory(that.getCategory());
-		setMedicineSymptoms(new java.util.LinkedHashSet<edu.yangsheng.domain.MedicineSymptom>(that.getMedicineSymptoms()));
+		setMedicineSymptoms(new java.util.LinkedHashSet<edu.yangsheng.domain.MedicineSymptom>(
+				that.getMedicineSymptoms()));
 	}
 
 	/**
 	 * Returns a textual representation of a bean.
-	 *
+	 * 
 	 */
 	public String toString() {
 
@@ -268,7 +290,8 @@ public class Symptom implements Serializable {
 		if (!(obj instanceof Symptom))
 			return false;
 		Symptom equalCheck = (Symptom) obj;
-		if ((id == null && equalCheck.id != null) || (id != null && equalCheck.id == null))
+		if ((id == null && equalCheck.id != null)
+				|| (id != null && equalCheck.id == null))
 			return false;
 		if (id != null && !id.equals(equalCheck.id))
 			return false;

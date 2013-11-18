@@ -15,24 +15,18 @@
 		<form:form action="${pageContext.request.contextPath}/saveUserCategory" method="POST" modelAttribute="usercategory">
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<tbody>
-					<tr>
-						<td class="label" valign="top">
-							<fmt:message key="usercategory.id.title"/>:
-						</td>
-						<td>
-							<c:choose>
-								<c:when test='${newFlag}' >
-							<form:input id="usercategory_id" path="id" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "usercategory_id",widgetType : "dijit.form.NumberTextBox",widgetAttrs : {promptMessage: "<fmt:message key="usercategory.id.help"/>", constraints : {places:0}}})); </script>
-								</c:when>
-								<c:otherwise>
-							${usercategory.id}
-						&nbsp;
-									<form:hidden id="usercategory_id" path="id"/>
-								</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
+					<c:if test="${not newFlag}">
+						<tr>
+							<td class="label" valign="top">
+								<fmt:message key="usercategory.id.title"/>:
+							</td>
+							<td>
+								${usercategory.id}
+							&nbsp;
+								<form:hidden id="usercategory_id" path="id"/>
+							</td>
+						</tr>
+					</c:if>
 					<tr>
 						<td class="label" valign="top">
 							<fmt:message key="usercategory.score.title"/>:
@@ -44,11 +38,10 @@
 					</tr>
 					<tr>
 						<td class="label" valign="top">
-							<fmt:message key="usercategory.createtime.title"/>:
+							<fmt:message key="user.title"/>:
 						</td>
 						<td>
-							<input id="usercategory_createTime" name="createTime" type="text" value="<fmt:formatDate value="${usercategory.createTime.time}" pattern="MM/dd/yyyy h:mm a"/>" style="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "usercategory_createTime",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="navigation.dateTime.title"/>"}})); </script>
+							<form:select id="usercategory_user" path="user.id" cssStyle="width:200px;" items="${users }" itemLabel="name" itemValue="id"/>
 						</td>
 					</tr>
 					<tr>

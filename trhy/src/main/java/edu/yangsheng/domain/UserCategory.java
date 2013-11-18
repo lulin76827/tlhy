@@ -34,9 +34,9 @@ import javax.xml.bind.annotation.XmlType;
 		@NamedQuery(name = "findUserCategoryById", query = "select myUserCategory from UserCategory myUserCategory where myUserCategory.id = ?1"),
 		@NamedQuery(name = "findUserCategoryByPrimaryKey", query = "select myUserCategory from UserCategory myUserCategory where myUserCategory.id = ?1"),
 		@NamedQuery(name = "findUserCategoryByScore", query = "select myUserCategory from UserCategory myUserCategory where myUserCategory.score = ?1") })
-@Table(catalog = "tlhy", name = "user_category")
+@Table(catalog = "trhy", name = "user_category")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "tlhy/edu/yangsheng/domain", name = "UserCategory")
+@XmlType(namespace = "trhy/edu/yangsheng/domain", name = "UserCategory")
 public class UserCategory implements Serializable {
 	private static final long serialVersionUID = 1L;
 

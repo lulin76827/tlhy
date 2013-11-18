@@ -10,7 +10,7 @@
 	<div id="lb"><div id="rb"><div id="bb"><div id="blc">
 	<div id="brc"><div id="tb"><div id="tlc"><div id="trc">
 		<div id="content">
-			<h1><fmt:message key="symptom.title"/> Details</h1>
+			<h1><fmt:message key="symptom.title"/>详情</h1>
 			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/indexSymptom"><span><img src="images/icons/back.gif" /><fmt:message key="navigation.back"/></span></a></div>	
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<tbody>
@@ -103,6 +103,7 @@
 				<thead>
 					<tr>
 						<th class="thead">&nbsp;</th>
+						<th class="thead"><fmt:message key="medicine.title"/></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -121,6 +122,11 @@
 							<a title="<fmt:message key="navigation.edit" />" href="${pageContext.request.contextPath}/editSymptomMedicineSymptoms?symptom_id=${symptom.id}&medicinesymptoms_id=${current.id}&"><img src="images/icons/edit.gif" /></a>
 							<a title="<fmt:message key="navigation.delete" />" href="${pageContext.request.contextPath}/confirmDeleteSymptomMedicineSymptoms?symptom_id=${symptom.id}&related_medicinesymptoms_id=${current.id}&"><img src="images/icons/delete.gif" /></a>
 						</td>
+						<td nowrap="nowrap" class="tabletd">
+						
+							${current.medicine.medicineField}
+						&nbsp;
+					</td>
 					</tr>
 					</c:forEach>
 				</tbody>

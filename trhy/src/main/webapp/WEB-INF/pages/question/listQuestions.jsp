@@ -17,6 +17,8 @@
 			<thead>
 				<tr>
 					<th class="thead">&nbsp;</th>
+					<th class="thead"><fmt:message key="question.type.title"/></th>
+					<th class="thead"><fmt:message key="question.questionItem.title"/></th>
 					<th class="thead"><fmt:message key="question.questionfield.title"/></th>
 					<th class="thead"><fmt:message key="category.title"/></th>
 				</tr>
@@ -36,6 +38,16 @@
 						<a title="<fmt:message key="navigation.view" />" href="${pageContext.request.contextPath}/selectQuestion?idKey=${current.id}&"><img src="images/icons/view.gif" /></a>
 						<a title="<fmt:message key="navigation.edit" />" href="${pageContext.request.contextPath}/editQuestion?idKey=${current.id}&"><img src="images/icons/edit.gif" /></a>
 						<a title="<fmt:message key="navigation.delete" />" href="${pageContext.request.contextPath}/confirmDeleteQuestion?idKey=${current.id}&"><img src="images/icons/delete.gif" /></a>
+					</td>
+					<td nowrap="nowrap" class="tabletd">
+						
+							${current.type.label}
+						&nbsp;
+					</td>
+					<td nowrap="nowrap" class="tabletd">
+						
+							${current.questionItem}
+						&nbsp;
 					</td>
 					<td nowrap="nowrap" class="tabletd">
 						

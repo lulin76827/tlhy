@@ -175,7 +175,10 @@ public class QuestionServiceImpl implements QuestionService {
 		if (existingQuestion != null) {
 			if (existingQuestion != question) {
 				existingQuestion.setId(question.getId());
+				existingQuestion.setType(question.getType());
 				existingQuestion.setQuestionField(question.getQuestionField());
+				existingQuestion.setQuestionItem(question.getQuestionItem());
+				existingQuestion.setCategory(question.getCategory());
 			}
 			question = questionDAO.store(existingQuestion);
 		} else {

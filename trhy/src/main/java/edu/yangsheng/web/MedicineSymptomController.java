@@ -206,6 +206,8 @@ public class MedicineSymptomController {
 	public ModelAndView editMedicineSymptom(@RequestParam Integer idKey) {
 		ModelAndView mav = new ModelAndView();
 
+		mav.addObject("medicines", medicineDAO.findAllMedicines());
+		mav.addObject("symptoms", symptomDAO.findAllSymptoms());
 		mav.addObject("medicinesymptom", medicineSymptomDAO.findMedicineSymptomByPrimaryKey(idKey));
 		mav.setViewName("medicinesymptom/editMedicineSymptom.jsp");
 
@@ -323,6 +325,7 @@ public class MedicineSymptomController {
 	@RequestMapping("/newMedicineSymptomMedicine")
 	public ModelAndView newMedicineSymptomMedicine(@RequestParam Integer medicinesymptom_id) {
 		ModelAndView mav = new ModelAndView();
+		
 		mav.addObject("medicinesymptom_id", medicinesymptom_id);
 		mav.addObject("medicine", new Medicine());
 		mav.addObject("newFlag", true);
@@ -386,6 +389,8 @@ public class MedicineSymptomController {
 	public ModelAndView newMedicineSymptom() {
 		ModelAndView mav = new ModelAndView();
 
+		mav.addObject("medicines", medicineDAO.findAllMedicines());
+		mav.addObject("symptoms", symptomDAO.findAllSymptoms());
 		mav.addObject("medicinesymptom", new MedicineSymptom());
 		mav.addObject("newFlag", true);
 		mav.setViewName("medicinesymptom/editMedicineSymptom.jsp");

@@ -6,30 +6,25 @@ import edu.yangsheng.dao.PathogenesisDAO;
 import edu.yangsheng.dao.QuestionDAO;
 import edu.yangsheng.dao.SymptomDAO;
 import edu.yangsheng.dao.UserCategoryDAO;
-
 import edu.yangsheng.domain.Category;
 import edu.yangsheng.domain.Medicine;
 import edu.yangsheng.domain.Pathogenesis;
 import edu.yangsheng.domain.Question;
 import edu.yangsheng.domain.Symptom;
 import edu.yangsheng.domain.UserCategory;
-
+import edu.yangsheng.domain.Question.QueryType;
 import edu.yangsheng.service.CategoryService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.WebDataBinder;
-
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -166,6 +161,7 @@ public class CategoryController {
 		Question question = questionDAO.findQuestionByPrimaryKey(questions_id, -1, -1);
 
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("questionTypes", QueryType.values());
 		mav.addObject("category_id", category_id);
 		mav.addObject("question", question);
 		mav.setViewName("category/questions/editQuestions.jsp");
@@ -257,6 +253,8 @@ public class CategoryController {
 	@RequestMapping("/newCategoryQuestions")
 	public ModelAndView newCategoryQuestions(@RequestParam Integer category_id) {
 		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("questionTypes", QueryType.values());
 		mav.addObject("category_id", category_id);
 		mav.addObject("question", new Question());
 		mav.addObject("newFlag", true);

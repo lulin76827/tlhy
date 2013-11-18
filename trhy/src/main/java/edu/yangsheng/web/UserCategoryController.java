@@ -1,29 +1,25 @@
 package edu.yangsheng.web;
 
+import java.util.Calendar;
+
 import edu.yangsheng.dao.CategoryDAO;
 import edu.yangsheng.dao.UserCategoryDAO;
 import edu.yangsheng.dao.UserDAO;
-
 import edu.yangsheng.domain.Category;
 import edu.yangsheng.domain.User;
 import edu.yangsheng.domain.UserCategory;
-
 import edu.yangsheng.service.UserCategoryService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.WebDataBinder;
-
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -79,6 +75,7 @@ public class UserCategoryController {
 	 */
 	@RequestMapping("/saveUserCategory")
 	public String saveUserCategory(@ModelAttribute UserCategory usercategory) {
+		usercategory.setCreateTime(Calendar.getInstance());
 		userCategoryService.saveUserCategory(usercategory);
 		return "forward:/indexUserCategory";
 	}
@@ -122,6 +119,7 @@ public class UserCategoryController {
 	public ModelAndView editUserCategory(@RequestParam Integer idKey) {
 		ModelAndView mav = new ModelAndView();
 
+		mav.addObject("users", userDAO.findAllUsers());
 		mav.addObject("categorys", categoryDAO.findAllCategorys());
 		mav.addObject("usercategory", userCategoryDAO.findUserCategoryByPrimaryKey(idKey));
 		mav.setViewName("usercategory/editUserCategory.jsp");
@@ -208,6 +206,7 @@ public class UserCategoryController {
 
 		mav.addObject("usercategory", new UserCategory());
 		mav.addObject("newFlag", true);
+		mav.addObject("users", userDAO.findAllUsers());
 		mav.addObject("categorys", categoryDAO.findAllCategorys());
 		mav.setViewName("usercategory/editUserCategory.jsp");
 

@@ -17,6 +17,8 @@
 			<thead>
 				<tr>
 					<th class="thead">&nbsp;</th>
+					<th class="thead"><fmt:message key="medicine.title"/></th>
+					<th class="thead"><fmt:message key="symptom.title"/></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -34,6 +36,16 @@
 						<a title="<fmt:message key="navigation.view" />" href="${pageContext.request.contextPath}/selectMedicineSymptom?idKey=${current.id}&"><img src="images/icons/view.gif" /></a>
 						<a title="<fmt:message key="navigation.edit" />" href="${pageContext.request.contextPath}/editMedicineSymptom?idKey=${current.id}&"><img src="images/icons/edit.gif" /></a>
 						<a title="<fmt:message key="navigation.delete" />" href="${pageContext.request.contextPath}/confirmDeleteMedicineSymptom?idKey=${current.id}&"><img src="images/icons/delete.gif" /></a>
+					</td>
+					<td nowrap="nowrap" class="tabletd">
+						
+							${current.medicine.medicineField}
+						&nbsp;
+					</td>
+					<td nowrap="nowrap" class="tabletd">
+						
+							${current.symptom.symptomField}
+						&nbsp;
 					</td>
 				</tr>
 				</c:forEach>

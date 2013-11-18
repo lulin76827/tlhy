@@ -1,29 +1,25 @@
 package edu.yangsheng.web;
 
+import java.util.Calendar;
+
 import edu.yangsheng.dao.AnswerDAO;
 import edu.yangsheng.dao.QuestionDAO;
 import edu.yangsheng.dao.UserDAO;
-
 import edu.yangsheng.domain.Answer;
 import edu.yangsheng.domain.Question;
 import edu.yangsheng.domain.User;
-
 import edu.yangsheng.service.AnswerService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.WebDataBinder;
-
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -124,6 +120,7 @@ public class AnswerController {
 	 */
 	@RequestMapping("/saveAnswer")
 	public String saveAnswer(@ModelAttribute Answer answer) {
+		answer.setCreateTime(Calendar.getInstance());
 		answerService.saveAnswer(answer);
 		return "forward:/indexAnswer";
 	}

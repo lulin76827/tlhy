@@ -15,22 +15,32 @@
 		<form:form action="${pageContext.request.contextPath}/saveMedicineSymptom" method="POST" modelAttribute="medicinesymptom">
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<tbody>
+					<c:if test="${not newFlag}">
+						<tr>
+							<td class="label" valign="top">
+								<fmt:message key="medicinesymptom.id.title"/>:
+							</td>
+							<td>
+								${medicinesymptom.id}
+							&nbsp;
+								<form:hidden id="medicinesymptom_id" path="id"/>
+							</td>
+						</tr>
+					</c:if>
 					<tr>
 						<td class="label" valign="top">
-							<fmt:message key="medicinesymptom.id.title"/>:
+							<fmt:message key="medicine.title"/>:
 						</td>
 						<td>
-							<c:choose>
-								<c:when test='${newFlag}' >
-							<form:input id="medicinesymptom_id" path="id" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "medicinesymptom_id",widgetType : "dijit.form.NumberTextBox",widgetAttrs : {promptMessage: "<fmt:message key="medicinesymptom.id.help"/>", constraints : {places:0}}})); </script>
-								</c:when>
-								<c:otherwise>
-							${medicinesymptom.id}
-						&nbsp;
-									<form:hidden id="medicinesymptom_id" path="id"/>
-								</c:otherwise>
-							</c:choose>
+							<form:select id="medicinesymptom_medicine" path="medicine.id" cssStyle="width:200px;" items="${medicines }" itemLabel="medicineField" itemValue="id"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
+							<fmt:message key="symptom.title"/>:
+						</td>
+						<td>
+							<form:select id="medicinesymptom_symptom" path="symptom.id" cssStyle="width:200px;" items="${symptoms }" itemLabel="symptomField" itemValue="id"/>
 						</td>
 					</tr>
 				</tbody>

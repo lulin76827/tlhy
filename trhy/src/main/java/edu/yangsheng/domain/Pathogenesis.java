@@ -35,11 +35,29 @@ import javax.xml.bind.annotation.XmlType;
 		@NamedQuery(name = "findPathogenesisByPrimaryKey", query = "select myPathogenesis from Pathogenesis myPathogenesis where myPathogenesis.id = ?1"),
 		@NamedQuery(name = "findPathogenesisByType", query = "select myPathogenesis from Pathogenesis myPathogenesis where myPathogenesis.type = ?1"),
 		@NamedQuery(name = "findPathogenesisByTypeContaining", query = "select myPathogenesis from Pathogenesis myPathogenesis where myPathogenesis.type like ?1") })
-@Table(catalog = "tlhy", name = "pathogenesis")
+@Table(catalog = "trhy", name = "pathogenesis")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "tlhy/edu/yangsheng/domain", name = "Pathogenesis")
+@XmlType(namespace = "trhy/edu/yangsheng/domain", name = "Pathogenesis")
 public class Pathogenesis implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	public static enum PathogenesisType {
+		work_way("工作方式"), living_habits("生活习惯"), diet_habits("饮食习惯"), climate_changes(
+				"气候变化"), modern_changes("情志变化"), other("其他");
+		String label;
+
+		private PathogenesisType(String label) {
+			this.label = label;
+		}
+
+		public String getLabel() {
+			return label;
+		}
+
+		public String getName() {
+			return this.name();
+		}
+	}
 
 	/**
 	 * 编号
@@ -78,7 +96,7 @@ public class Pathogenesis implements Serializable {
 	@Column(name = "type", length = 15, nullable = false)
 	@Basic(fetch = FetchType.EAGER)
 	@XmlElement
-	String type;
+	PathogenesisType type;
 
 	/**
 	 */
@@ -139,7 +157,7 @@ public class Pathogenesis implements Serializable {
 	 * 类型，工作方式、生活习惯、饮食习惯、气候变化、情志变化还是其他方面
 	 * 
 	 */
-	public void setType(String type) {
+	public void setType(PathogenesisType type) {
 		this.type = type;
 	}
 
@@ -147,7 +165,7 @@ public class Pathogenesis implements Serializable {
 	 * 类型，工作方式、生活习惯、饮食习惯、气候变化、情志变化还是其他方面
 	 * 
 	 */
-	public String getType() {
+	public PathogenesisType getType() {
 		return this.type;
 	}
 
@@ -170,7 +188,7 @@ public class Pathogenesis implements Serializable {
 
 	/**
 	 * Copies the contents of the specified bean into this bean.
-	 *
+	 * 
 	 */
 	public void copy(Pathogenesis that) {
 		setId(that.getId());
@@ -182,7 +200,7 @@ public class Pathogenesis implements Serializable {
 
 	/**
 	 * Returns a textual representation of a bean.
-	 *
+	 * 
 	 */
 	public String toString() {
 
@@ -190,7 +208,8 @@ public class Pathogenesis implements Serializable {
 
 		buffer.append("id=[").append(id).append("] ");
 		buffer.append("describ=[").append(describ).append("] ");
-		buffer.append("pathogenesisField=[").append(pathogenesisField).append("] ");
+		buffer.append("pathogenesisField=[").append(pathogenesisField)
+				.append("] ");
 		buffer.append("type=[").append(type).append("] ");
 
 		return buffer.toString();
@@ -214,7 +233,8 @@ public class Pathogenesis implements Serializable {
 		if (!(obj instanceof Pathogenesis))
 			return false;
 		Pathogenesis equalCheck = (Pathogenesis) obj;
-		if ((id == null && equalCheck.id != null) || (id != null && equalCheck.id == null))
+		if ((id == null && equalCheck.id != null)
+				|| (id != null && equalCheck.id == null))
 			return false;
 		if (id != null && !id.equals(equalCheck.id))
 			return false;

@@ -10,7 +10,7 @@
 	<div id="lb"><div id="rb"><div id="bb"><div id="blc">
 	<div id="brc"><div id="tb"><div id="tlc"><div id="trc">
 		<div id="content">
-			<h1><fmt:message key="category.title"/> Details</h1>
+			<h1><fmt:message key="category.title"/>详情</h1>
 			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/indexCategory"><span><img src="images/icons/back.gif" /><fmt:message key="navigation.back"/></span></a></div>	
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<tbody>
@@ -104,6 +104,8 @@
 				<thead>
 					<tr>
 						<th class="thead">&nbsp;</th>
+						<th class="thead"><fmt:message key="question.type.title"/></th>
+						<th class="thead"><fmt:message key="question.questionItem.title"/></th>
 						<th class="thead"><fmt:message key="question.questionfield.title"/></th>
 					</tr>
 				</thead>
@@ -122,6 +124,16 @@
 							<a title="<fmt:message key="navigation.view" />" href="${pageContext.request.contextPath}/selectCategoryQuestions?category_id=${category.id}&questions_id=${current.id}&"><img src="images/icons/view.gif" /></a>
 							<a title="<fmt:message key="navigation.edit" />" href="${pageContext.request.contextPath}/editCategoryQuestions?category_id=${category.id}&questions_id=${current.id}&"><img src="images/icons/edit.gif" /></a>
 							<a title="<fmt:message key="navigation.delete" />" href="${pageContext.request.contextPath}/confirmDeleteCategoryQuestions?category_id=${category.id}&related_questions_id=${current.id}&"><img src="images/icons/delete.gif" /></a>
+						</td>
+						<td nowrap="nowrap" class="tabletd">
+						
+							${current.type.label}
+						&nbsp;
+						</td>
+						<td nowrap="nowrap" class="tabletd">
+							
+								${current.questionItem}
+							&nbsp;
 						</td>
 						<td>
 							${current.questionField}
