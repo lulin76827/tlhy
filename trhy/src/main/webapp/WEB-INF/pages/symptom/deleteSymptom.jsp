@@ -56,7 +56,7 @@
 							<fmt:message key="symptom.type.title"/>:
 						</td>
 						<td>
-							${symptom.type}
+							${symptom.type.label}
 						&nbsp;
 						</td>
 					</tr>

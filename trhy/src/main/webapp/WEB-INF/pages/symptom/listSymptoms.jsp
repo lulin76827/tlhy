@@ -57,7 +57,7 @@
 					</td>
 					<td nowrap="nowrap" class="tabletd">
 						
-							${current.type}
+							${current.type.label}
 						&nbsp;
 					</td>
 					<td nowrap="nowrap" class="tabletd">

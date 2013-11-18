@@ -47,7 +47,7 @@
 							<fmt:message key="medicine.type.title"/>:
 						</td>
 						<td>
-							${medicine.type}
+							${medicine.type.label}
 						&nbsp;
 						</td>
 					</tr>

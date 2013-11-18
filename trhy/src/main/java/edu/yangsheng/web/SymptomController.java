@@ -3,27 +3,22 @@ package edu.yangsheng.web;
 import edu.yangsheng.dao.CategoryDAO;
 import edu.yangsheng.dao.MedicineSymptomDAO;
 import edu.yangsheng.dao.SymptomDAO;
-
 import edu.yangsheng.domain.Category;
 import edu.yangsheng.domain.MedicineSymptom;
 import edu.yangsheng.domain.Symptom;
-
+import edu.yangsheng.domain.Symptom.SymptomType;
 import edu.yangsheng.service.SymptomService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.WebDataBinder;
-
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -318,6 +313,7 @@ public class SymptomController {
 	public ModelAndView editSymptom(@RequestParam Integer idKey) {
 		ModelAndView mav = new ModelAndView();
 
+		mav.addObject("symptomTypes", SymptomType.values());
 		mav.addObject("categorys", categoryDAO.findAllCategorys());
 		mav.addObject("symptom", symptomDAO.findSymptomByPrimaryKey(idKey));
 		mav.setViewName("symptom/editSymptom.jsp");
@@ -348,6 +344,7 @@ public class SymptomController {
 	public ModelAndView newSymptom() {
 		ModelAndView mav = new ModelAndView();
 
+		mav.addObject("symptomTypes", SymptomType.values());
 		mav.addObject("symptom", new Symptom());
 		mav.addObject("newFlag", true);
 		mav.addObject("categorys", categoryDAO.findAllCategorys());

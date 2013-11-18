@@ -47,7 +47,7 @@
 							<fmt:message key="pathogenesis.type.title"/>:
 						</td>
 						<td>
-							${pathogenesis.type}
+							${pathogenesis.type.label}
 						&nbsp;
 						</td>
 					</tr>

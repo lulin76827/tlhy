@@ -50,8 +50,7 @@
 							<fmt:message key="medicine.type.title"/>:
 						</td>
 						<td>
-							<form:input id="medicine_type" path="type" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "medicine_type",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="medicine.type.help"/>"}})); </script>
+							<form:select id="medicine_type" path="type" cssStyle="width:200px;" items="${medicineTypes }" itemLabel="label" itemValue="name"/>
 						</td>
 					</tr>
 					<tr>

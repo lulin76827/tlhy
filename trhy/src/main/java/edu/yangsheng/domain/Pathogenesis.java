@@ -22,6 +22,10 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 /**
+ * 病理
+ * 
+ * @author Administrator
+ * 
  */
 
 @Entity

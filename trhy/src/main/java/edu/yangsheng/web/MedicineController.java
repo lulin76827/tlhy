@@ -3,27 +3,22 @@ package edu.yangsheng.web;
 import edu.yangsheng.dao.CategoryDAO;
 import edu.yangsheng.dao.MedicineDAO;
 import edu.yangsheng.dao.MedicineSymptomDAO;
-
 import edu.yangsheng.domain.Category;
 import edu.yangsheng.domain.Medicine;
+import edu.yangsheng.domain.Medicine.MedicineType;
 import edu.yangsheng.domain.MedicineSymptom;
-
 import edu.yangsheng.service.MedicineService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.WebDataBinder;
-
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -194,6 +189,7 @@ public class MedicineController {
 	public ModelAndView newMedicine() {
 		ModelAndView mav = new ModelAndView();
 
+		mav.addObject("medicineTypes", MedicineType.values());
 		mav.addObject("medicine", new Medicine());
 		mav.addObject("newFlag", true);
 		mav.addObject("categorys", categoryDAO.findAllCategorys());
@@ -245,6 +241,8 @@ public class MedicineController {
 	@RequestMapping("/editMedicine")
 	public ModelAndView editMedicine(@RequestParam Integer idKey) {
 		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("medicineTypes", MedicineType.values());
 		mav.addObject("categorys", categoryDAO.findAllCategorys());
 		mav.addObject("medicine", medicineDAO.findMedicineByPrimaryKey(idKey));
 		mav.setViewName("medicine/editMedicine.jsp");

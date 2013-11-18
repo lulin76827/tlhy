@@ -2,26 +2,21 @@ package edu.yangsheng.web;
 
 import edu.yangsheng.dao.CategoryDAO;
 import edu.yangsheng.dao.PathogenesisDAO;
-
 import edu.yangsheng.domain.Category;
 import edu.yangsheng.domain.Pathogenesis;
-
+import edu.yangsheng.domain.Pathogenesis.PathogenesisType;
 import edu.yangsheng.service.PathogenesisService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.WebDataBinder;
-
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -47,7 +42,8 @@ public class PathogenesisController {
 	private PathogenesisDAO pathogenesisDAO;
 
 	/**
-	 * Service injected by Spring that provides CRUD operations for Pathogenesis entities
+	 * Service injected by Spring that provides CRUD operations for Pathogenesis
+	 * entities
 	 * 
 	 */
 	@Autowired
@@ -73,8 +69,11 @@ public class PathogenesisController {
 	 * 
 	 */
 	@RequestMapping("/selectPathogenesisCategory")
-	public ModelAndView selectPathogenesisCategory(@RequestParam Integer pathogenesis_id, @RequestParam Integer category_id) {
-		Category category = categoryDAO.findCategoryByPrimaryKey(category_id, -1, -1);
+	public ModelAndView selectPathogenesisCategory(
+			@RequestParam Integer pathogenesis_id,
+			@RequestParam Integer category_id) {
+		Category category = categoryDAO.findCategoryByPrimaryKey(category_id,
+				-1, -1);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("pathogenesis_id", pathogenesis_id);
@@ -89,7 +88,8 @@ public class PathogenesisController {
 	 * 
 	 */
 	@RequestMapping("/newPathogenesisCategory")
-	public ModelAndView newPathogenesisCategory(@RequestParam Integer pathogenesis_id) {
+	public ModelAndView newPathogenesisCategory(
+			@RequestParam Integer pathogenesis_id) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("pathogenesis_id", pathogenesis_id);
 		mav.addObject("category", new Category());
@@ -107,7 +107,8 @@ public class PathogenesisController {
 	public ModelAndView listPathogenesisCategory(@RequestParam Integer idKey) {
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("pathogenesis", pathogenesisDAO.findPathogenesisByPrimaryKey(idKey));
+		mav.addObject("pathogenesis",
+				pathogenesisDAO.findPathogenesisByPrimaryKey(idKey));
 		mav.setViewName("pathogenesis/category/listCategory.jsp");
 
 		return mav;
@@ -121,7 +122,8 @@ public class PathogenesisController {
 	public ModelAndView selectPathogenesis(@RequestParam Integer idKey) {
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("pathogenesis", pathogenesisDAO.findPathogenesisByPrimaryKey(idKey));
+		mav.addObject("pathogenesis",
+				pathogenesisDAO.findPathogenesisByPrimaryKey(idKey));
 		mav.setViewName("pathogenesis/viewPathogenesis.jsp");
 
 		return mav;
@@ -132,8 +134,11 @@ public class PathogenesisController {
 	 * 
 	 */
 	@RequestMapping("/editPathogenesisCategory")
-	public ModelAndView editPathogenesisCategory(@RequestParam Integer pathogenesis_id, @RequestParam Integer category_id) {
-		Category category = categoryDAO.findCategoryByPrimaryKey(category_id, -1, -1);
+	public ModelAndView editPathogenesisCategory(
+			@RequestParam Integer pathogenesis_id,
+			@RequestParam Integer category_id) {
+		Category category = categoryDAO.findCategoryByPrimaryKey(category_id,
+				-1, -1);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("pathogenesis_id", pathogenesis_id);
@@ -152,14 +157,16 @@ public class PathogenesisController {
 	}
 
 	/**
-	 * Select the Pathogenesis entity for display allowing the user to confirm that they would like to delete the entity
+	 * Select the Pathogenesis entity for display allowing the user to confirm
+	 * that they would like to delete the entity
 	 * 
 	 */
 	@RequestMapping("/confirmDeletePathogenesis")
 	public ModelAndView confirmDeletePathogenesis(@RequestParam Integer idKey) {
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("pathogenesis", pathogenesisDAO.findPathogenesisByPrimaryKey(idKey));
+		mav.addObject("pathogenesis",
+				pathogenesisDAO.findPathogenesisByPrimaryKey(idKey));
 		mav.setViewName("pathogenesis/deletePathogenesis.jsp");
 
 		return mav;
@@ -172,8 +179,11 @@ public class PathogenesisController {
 	@RequestMapping("/editPathogenesis")
 	public ModelAndView editPathogenesis(@RequestParam Integer idKey) {
 		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("pathogenesisTypes", PathogenesisType.values());
 		mav.addObject("categorys", categoryDAO.findAllCategorys());
-		mav.addObject("pathogenesis", pathogenesisDAO.findPathogenesisByPrimaryKey(idKey));
+		mav.addObject("pathogenesis",
+				pathogenesisDAO.findPathogenesisByPrimaryKey(idKey));
 		mav.setViewName("pathogenesis/editPathogenesis.jsp");
 
 		return mav;
@@ -182,7 +192,9 @@ public class PathogenesisController {
 	/**
 	 */
 	@RequestMapping("/pathogenesisController/binary.action")
-	public ModelAndView streamBinary(@ModelAttribute HttpServletRequest request, @ModelAttribute HttpServletResponse response) {
+	public ModelAndView streamBinary(
+			@ModelAttribute HttpServletRequest request,
+			@ModelAttribute HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("streamedBinaryContentView");
 		return mav;
@@ -195,7 +207,8 @@ public class PathogenesisController {
 	 */
 	@RequestMapping("/deletePathogenesis")
 	public String deletePathogenesis(@RequestParam Integer idKey) {
-		Pathogenesis pathogenesis = pathogenesisDAO.findPathogenesisByPrimaryKey(idKey);
+		Pathogenesis pathogenesis = pathogenesisDAO
+				.findPathogenesisByPrimaryKey(idKey);
 		pathogenesisService.deletePathogenesis(pathogenesis);
 		return "forward:/indexPathogenesis";
 	}
@@ -211,14 +224,18 @@ public class PathogenesisController {
 	}
 
 	/**
-	 * Select the child Category entity for display allowing the user to confirm that they would like to delete the entity
+	 * Select the child Category entity for display allowing the user to confirm
+	 * that they would like to delete the entity
 	 * 
 	 */
 	@RequestMapping("/confirmDeletePathogenesisCategory")
-	public ModelAndView confirmDeletePathogenesisCategory(@RequestParam Integer pathogenesis_id, @RequestParam Integer related_category_id) {
+	public ModelAndView confirmDeletePathogenesisCategory(
+			@RequestParam Integer pathogenesis_id,
+			@RequestParam Integer related_category_id) {
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("category", categoryDAO.findCategoryByPrimaryKey(related_category_id));
+		mav.addObject("category",
+				categoryDAO.findCategoryByPrimaryKey(related_category_id));
 		mav.addObject("pathogenesis_id", pathogenesis_id);
 		mav.setViewName("pathogenesis/category/deleteCategory.jsp");
 
@@ -230,17 +247,37 @@ public class PathogenesisController {
 	 * 
 	 */
 	@InitBinder
-	public void initBinder(WebDataBinder binder, HttpServletRequest request) { // Register static property editors.
-		binder.registerCustomEditor(java.util.Calendar.class, new org.skyway.spring.util.databinding.CustomCalendarEditor());
-		binder.registerCustomEditor(byte[].class, new org.springframework.web.multipart.support.ByteArrayMultipartFileEditor());
-		binder.registerCustomEditor(boolean.class, new org.skyway.spring.util.databinding.EnhancedBooleanEditor(false));
-		binder.registerCustomEditor(Boolean.class, new org.skyway.spring.util.databinding.EnhancedBooleanEditor(true));
-		binder.registerCustomEditor(java.math.BigDecimal.class, new org.skyway.spring.util.databinding.NaNHandlingNumberEditor(java.math.BigDecimal.class, true));
-		binder.registerCustomEditor(Integer.class, new org.skyway.spring.util.databinding.NaNHandlingNumberEditor(Integer.class, true));
-		binder.registerCustomEditor(java.util.Date.class, new org.skyway.spring.util.databinding.CustomDateEditor());
-		binder.registerCustomEditor(String.class, new org.skyway.spring.util.databinding.StringEditor());
-		binder.registerCustomEditor(Long.class, new org.skyway.spring.util.databinding.NaNHandlingNumberEditor(Long.class, true));
-		binder.registerCustomEditor(Double.class, new org.skyway.spring.util.databinding.NaNHandlingNumberEditor(Double.class, true));
+	public void initBinder(WebDataBinder binder, HttpServletRequest request) { // Register
+																				// static
+																				// property
+																				// editors.
+		binder.registerCustomEditor(java.util.Calendar.class,
+				new org.skyway.spring.util.databinding.CustomCalendarEditor());
+		binder.registerCustomEditor(
+				byte[].class,
+				new org.springframework.web.multipart.support.ByteArrayMultipartFileEditor());
+		binder.registerCustomEditor(boolean.class,
+				new org.skyway.spring.util.databinding.EnhancedBooleanEditor(
+						false));
+		binder.registerCustomEditor(Boolean.class,
+				new org.skyway.spring.util.databinding.EnhancedBooleanEditor(
+						true));
+		binder.registerCustomEditor(java.math.BigDecimal.class,
+				new org.skyway.spring.util.databinding.NaNHandlingNumberEditor(
+						java.math.BigDecimal.class, true));
+		binder.registerCustomEditor(Integer.class,
+				new org.skyway.spring.util.databinding.NaNHandlingNumberEditor(
+						Integer.class, true));
+		binder.registerCustomEditor(java.util.Date.class,
+				new org.skyway.spring.util.databinding.CustomDateEditor());
+		binder.registerCustomEditor(String.class,
+				new org.skyway.spring.util.databinding.StringEditor());
+		binder.registerCustomEditor(Long.class,
+				new org.skyway.spring.util.databinding.NaNHandlingNumberEditor(
+						Long.class, true));
+		binder.registerCustomEditor(Double.class,
+				new org.skyway.spring.util.databinding.NaNHandlingNumberEditor(
+						Double.class, true));
 	}
 
 	/**
@@ -248,10 +285,14 @@ public class PathogenesisController {
 	 * 
 	 */
 	@RequestMapping("/deletePathogenesisCategory")
-	public ModelAndView deletePathogenesisCategory(@RequestParam Integer pathogenesis_id, @RequestParam Integer related_category_id) {
+	public ModelAndView deletePathogenesisCategory(
+			@RequestParam Integer pathogenesis_id,
+			@RequestParam Integer related_category_id) {
 		ModelAndView mav = new ModelAndView();
 
-		Pathogenesis pathogenesis = pathogenesisService.deletePathogenesisCategory(pathogenesis_id, related_category_id);
+		Pathogenesis pathogenesis = pathogenesisService
+				.deletePathogenesisCategory(pathogenesis_id,
+						related_category_id);
 
 		mav.addObject("pathogenesis_id", pathogenesis_id);
 		mav.addObject("pathogenesis", pathogenesis);
@@ -265,8 +306,11 @@ public class PathogenesisController {
 	 * 
 	 */
 	@RequestMapping("/savePathogenesisCategory")
-	public ModelAndView savePathogenesisCategory(@RequestParam Integer pathogenesis_id, @ModelAttribute Category category) {
-		Pathogenesis parent_pathogenesis = pathogenesisService.savePathogenesisCategory(pathogenesis_id, category);
+	public ModelAndView savePathogenesisCategory(
+			@RequestParam Integer pathogenesis_id,
+			@ModelAttribute Category category) {
+		Pathogenesis parent_pathogenesis = pathogenesisService
+				.savePathogenesisCategory(pathogenesis_id, category);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("pathogenesis_id", pathogenesis_id);
@@ -284,6 +328,7 @@ public class PathogenesisController {
 	public ModelAndView newPathogenesis() {
 		ModelAndView mav = new ModelAndView();
 
+		mav.addObject("pathogenesisTypes", PathogenesisType.values());
 		mav.addObject("pathogenesis", new Pathogenesis());
 		mav.addObject("newFlag", true);
 		mav.addObject("categorys", categoryDAO.findAllCategorys());
