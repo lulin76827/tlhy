@@ -3,7 +3,6 @@ package edu.yangsheng.service;
 import edu.yangsheng.dao.AnswerDAO;
 import edu.yangsheng.dao.QuestionDAO;
 import edu.yangsheng.dao.UserDAO;
-
 import edu.yangsheng.domain.Answer;
 import edu.yangsheng.domain.Question;
 import edu.yangsheng.domain.User;
@@ -12,9 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -225,5 +222,10 @@ public class AnswerServiceImpl implements AnswerService {
 	@Transactional
 	public Set<Answer> loadAnswers() {
 		return answerDAO.findAllAnswers();
+	}
+
+	@Override
+	public List<Answer> findAllAnswersByUser(Integer user) {
+		return answerDAO.executeQueryByName("findAnswerByUser", user);
 	}
 }

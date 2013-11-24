@@ -31,7 +31,9 @@
 			<jsp:include page="/WEB-INF/sitemesh-common/header.jsp" />
 		    <% if (!((HttpServletRequest)pageContext.getRequest()).getServletPath().equals("/index.jsp")){ %>
 		    <div id="nav">
-				<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/index.jsp"><span><img src="${pageContext.request.contextPath}/images/icons/back.gif" /><fmt:message key="navigation.backToDashboard"/></span></a></div>
+			    <sec:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
+					<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/index.jsp"><span><img src="${pageContext.request.contextPath}/images/icons/back.gif" /><fmt:message key="navigation.backToDashboard"/></span></a></div>
+			    </sec:authorize>
 		    </div>
 			<% } %>     
 			<div id="contentwrapper">      

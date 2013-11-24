@@ -33,6 +33,10 @@ public interface AccountService {
 	/**
 	 */
 	public Account findAccountByPrimaryKey(Integer id_1);
+	
+	/**
+	 */
+	public Account findAccountByUsername(String username);
 
 	/**
 	 * Return all Account entity

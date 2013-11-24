@@ -70,4 +70,6 @@ public interface AnswerService {
 	 * 
 	 */
 	public Set<Answer> loadAnswers();
+
+	public List<Answer> findAllAnswersByUser(Integer user);
 }

@@ -70,4 +70,6 @@ public interface QuestionService {
 	 * 
 	 */
 	public Set<Question> loadQuestions();
+
+	public List<Question> findNextGroupQuestions(Integer user);
 }

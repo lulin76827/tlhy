@@ -61,13 +61,6 @@
         <property name="prefix" value="/WEB-INF/pages/" />
 	</bean>
 
-	<bean id="iPhoneUserAgentViewResolver" class="org.skyway.spring.util.viewresolution.UserAgentViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-        <property name="agentSubstring" value="iPhone" />
-        <property name="prefix" value="/WEB-INF/iphone/" />
-        <property name="order" value="0" />
-    </bean>
-
 	<bean id="webInfViewResolver" class="org.skyway.spring.util.viewresolution.AbsolutePathViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
         <property name="order" value="-1" />

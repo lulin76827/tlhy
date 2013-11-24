@@ -1,12 +1,12 @@
 package edu.yangsheng.dao;
 
-import edu.yangsheng.domain.Question;
-
+import java.util.List;
 import java.util.Set;
 
 import org.skyway.spring.util.dao.JpaDao;
-
 import org.springframework.dao.DataAccessException;
+
+import edu.yangsheng.domain.Question;
 
 /**
  * DAO to manage Question entities.
@@ -61,6 +61,11 @@ public interface QuestionDAO extends JpaDao<Question> {
 	 *
 	 */
 	public Set<Question> findAllQuestions(int startResult, int maxRows) throws DataAccessException;
+	/**
+	 * JPQL Query - findAllQuestions
+	 *
+	 */
+	public List<Question> findAllQuestionByCategory(int category) throws DataAccessException;
 
 	/**
 	 * JPQL Query - findQuestionByQuestionField

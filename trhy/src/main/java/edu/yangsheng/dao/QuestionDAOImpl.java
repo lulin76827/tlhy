@@ -1,10 +1,9 @@
 package edu.yangsheng.dao;
 
-import edu.yangsheng.domain.Question;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -13,12 +12,11 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.skyway.spring.util.dao.AbstractJpaDao;
-
 import org.springframework.dao.DataAccessException;
-
 import org.springframework.stereotype.Repository;
-
 import org.springframework.transaction.annotation.Transactional;
+
+import edu.yangsheng.domain.Question;
 
 /**
  * DAO to manage Question entities.
@@ -148,6 +146,12 @@ public class QuestionDAOImpl extends AbstractJpaDao<Question> implements
 		return findAllQuestions(-1, -1);
 	}
 
+	@Override
+	public List<Question> findAllQuestionByCategory(int category)
+			throws DataAccessException {
+		List<Question> querys = executeQueryByName("findQuestionByCategory", category);
+		return querys;
+	}
 	/**
 	 * JPQL Query - findAllQuestions
 	 *
@@ -191,4 +195,5 @@ public class QuestionDAOImpl extends AbstractJpaDao<Question> implements
 	public boolean canBeMerged(Question entity) {
 		return true;
 	}
+
 }

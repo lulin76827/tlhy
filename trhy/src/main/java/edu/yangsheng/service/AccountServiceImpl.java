@@ -2,7 +2,6 @@ package edu.yangsheng.service;
 
 import edu.yangsheng.dao.AccountDAO;
 import edu.yangsheng.dao.UserDAO;
-
 import edu.yangsheng.domain.Account;
 import edu.yangsheng.domain.User;
 
@@ -10,9 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -40,7 +37,7 @@ public class AccountServiceImpl implements AccountService {
 
 	/**
 	 * Instantiates a new AccountServiceImpl.
-	 *
+	 * 
 	 */
 	public AccountServiceImpl() {
 	}
@@ -51,8 +48,10 @@ public class AccountServiceImpl implements AccountService {
 	 */
 	@Transactional
 	public Account deleteAccountUser(Integer account_id, Integer related_user_id) {
-		Account account = accountDAO.findAccountByPrimaryKey(account_id, -1, -1);
-		User related_user = userDAO.findUserByPrimaryKey(related_user_id, -1, -1);
+		Account account = accountDAO
+				.findAccountByPrimaryKey(account_id, -1, -1);
+		User related_user = userDAO.findUserByPrimaryKey(related_user_id, -1,
+				-1);
 
 		account.setUser(null);
 		related_user.getAccounts().remove(account);
@@ -123,13 +122,20 @@ public class AccountServiceImpl implements AccountService {
 		return accountDAO.findAccountByPrimaryKey(id);
 	}
 
+	@Override
+	public Account findAccountByUsername(String username) {
+		Account account = accountDAO.executeQueryByNameSingleResult("findAccountByUsername", username);
+		return account;
+	}
+
 	/**
 	 * Return all Account entity
 	 * 
 	 */
 	@Transactional
 	public List<Account> findAllAccounts(Integer startResult, Integer maxRows) {
-		return new java.util.ArrayList<Account>(accountDAO.findAllAccounts(startResult, maxRows));
+		return new java.util.ArrayList<Account>(accountDAO.findAllAccounts(
+				startResult, maxRows));
 	}
 
 	/**
@@ -147,7 +153,8 @@ public class AccountServiceImpl implements AccountService {
 	 */
 	@Transactional
 	public void saveAccount(Account account) {
-		Account existingAccount = accountDAO.findAccountByPrimaryKey(account.getId());
+		Account existingAccount = accountDAO.findAccountByPrimaryKey(account
+				.getId());
 
 		if (existingAccount != null) {
 			if (existingAccount != account) {
@@ -169,6 +176,8 @@ public class AccountServiceImpl implements AccountService {
 	 */
 	@Transactional
 	public Integer countAccounts() {
-		return ((Long) accountDAO.createQuerySingleResult("select count(o) from Account o").getSingleResult()).intValue();
+		return ((Long) accountDAO.createQuerySingleResult(
+				"select count(o) from Account o").getSingleResult()).intValue();
 	}
+
 }

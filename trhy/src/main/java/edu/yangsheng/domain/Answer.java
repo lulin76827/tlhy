@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlType;
 		@NamedQuery(name = "findAnswerByCreateTime", query = "select myAnswer from Answer myAnswer where myAnswer.createTime = ?1"),
 		@NamedQuery(name = "findAnswerById", query = "select myAnswer from Answer myAnswer where myAnswer.id = ?1"),
 		@NamedQuery(name = "findAnswerByPrimaryKey", query = "select myAnswer from Answer myAnswer where myAnswer.id = ?1"),
+		@NamedQuery(name = "findAnswerByUser", query = "select myAnswer from Answer myAnswer where myAnswer.user.id = ?1"),
 		@NamedQuery(name = "findAnswerByRecord", query = "select myAnswer from Answer myAnswer where myAnswer.record = ?1") })
 @Table(catalog = "trhy", name = "answer")
 @XmlAccessorType(XmlAccessType.FIELD)

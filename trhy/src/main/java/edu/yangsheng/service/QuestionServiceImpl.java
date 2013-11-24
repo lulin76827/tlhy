@@ -1,21 +1,18 @@
 package edu.yangsheng.service;
 
-import edu.yangsheng.dao.AnswerDAO;
-import edu.yangsheng.dao.CategoryDAO;
-import edu.yangsheng.dao.QuestionDAO;
-
-import edu.yangsheng.domain.Answer;
-import edu.yangsheng.domain.Category;
-import edu.yangsheng.domain.Question;
-
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
+
+import edu.yangsheng.dao.AnswerDAO;
+import edu.yangsheng.dao.CategoryDAO;
+import edu.yangsheng.dao.QuestionDAO;
+import edu.yangsheng.domain.Answer;
+import edu.yangsheng.domain.Category;
+import edu.yangsheng.domain.Question;
 
 /**
  * Spring service that handles CRUD requests for Question entities
@@ -49,7 +46,7 @@ public class QuestionServiceImpl implements QuestionService {
 
 	/**
 	 * Instantiates a new QuestionServiceImpl.
-	 *
+	 * 
 	 */
 	public QuestionServiceImpl() {
 	}
@@ -61,7 +58,8 @@ public class QuestionServiceImpl implements QuestionService {
 	@Transactional
 	public Question saveQuestionAnswers(Integer id, Answer related_answers) {
 		Question question = questionDAO.findQuestionByPrimaryKey(id, -1, -1);
-		Answer existinganswers = answerDAO.findAnswerByPrimaryKey(related_answers.getId());
+		Answer existinganswers = answerDAO
+				.findAnswerByPrimaryKey(related_answers.getId());
 
 		// copy into the existing record to preserve existing relationships
 		if (existinganswers != null) {
@@ -89,12 +87,14 @@ public class QuestionServiceImpl implements QuestionService {
 	@Transactional
 	public Question saveQuestionCategory(Integer id, Category related_category) {
 		Question question = questionDAO.findQuestionByPrimaryKey(id, -1, -1);
-		Category existingcategory = categoryDAO.findCategoryByPrimaryKey(related_category.getId());
+		Category existingcategory = categoryDAO
+				.findCategoryByPrimaryKey(related_category.getId());
 
 		// copy into the existing record to preserve existing relationships
 		if (existingcategory != null) {
 			existingcategory.setId(related_category.getId());
-			existingcategory.setCategoryField(related_category.getCategoryField());
+			existingcategory.setCategoryField(related_category
+					.getCategoryField());
 			existingcategory.setDescrib(related_category.getDescrib());
 			related_category = existingcategory;
 		}
@@ -116,7 +116,8 @@ public class QuestionServiceImpl implements QuestionService {
 	 */
 	@Transactional
 	public List<Question> findAllQuestions(Integer startResult, Integer maxRows) {
-		return new java.util.ArrayList<Question>(questionDAO.findAllQuestions(startResult, maxRows));
+		return new java.util.ArrayList<Question>(questionDAO.findAllQuestions(
+				startResult, maxRows));
 	}
 
 	/**
@@ -125,7 +126,9 @@ public class QuestionServiceImpl implements QuestionService {
 	 */
 	@Transactional
 	public Integer countQuestions() {
-		return ((Long) questionDAO.createQuerySingleResult("select count(o) from Question o").getSingleResult()).intValue();
+		return ((Long) questionDAO.createQuerySingleResult(
+				"select count(o) from Question o").getSingleResult())
+				.intValue();
 	}
 
 	/**
@@ -143,10 +146,13 @@ public class QuestionServiceImpl implements QuestionService {
 	 * 
 	 */
 	@Transactional
-	public Question deleteQuestionAnswers(Integer question_id, Integer related_answers_id) {
-		Answer related_answers = answerDAO.findAnswerByPrimaryKey(related_answers_id, -1, -1);
+	public Question deleteQuestionAnswers(Integer question_id,
+			Integer related_answers_id) {
+		Answer related_answers = answerDAO.findAnswerByPrimaryKey(
+				related_answers_id, -1, -1);
 
-		Question question = questionDAO.findQuestionByPrimaryKey(question_id, -1, -1);
+		Question question = questionDAO.findQuestionByPrimaryKey(question_id,
+				-1, -1);
 
 		related_answers.setQuestion(null);
 		question.getAnswers().remove(related_answers);
@@ -170,7 +176,8 @@ public class QuestionServiceImpl implements QuestionService {
 	 */
 	@Transactional
 	public void saveQuestion(Question question) {
-		Question existingQuestion = questionDAO.findQuestionByPrimaryKey(question.getId());
+		Question existingQuestion = questionDAO
+				.findQuestionByPrimaryKey(question.getId());
 
 		if (existingQuestion != null) {
 			if (existingQuestion != question) {
@@ -192,9 +199,12 @@ public class QuestionServiceImpl implements QuestionService {
 	 * 
 	 */
 	@Transactional
-	public Question deleteQuestionCategory(Integer question_id, Integer related_category_id) {
-		Question question = questionDAO.findQuestionByPrimaryKey(question_id, -1, -1);
-		Category related_category = categoryDAO.findCategoryByPrimaryKey(related_category_id, -1, -1);
+	public Question deleteQuestionCategory(Integer question_id,
+			Integer related_category_id) {
+		Question question = questionDAO.findQuestionByPrimaryKey(question_id,
+				-1, -1);
+		Category related_category = categoryDAO.findCategoryByPrimaryKey(
+				related_category_id, -1, -1);
 
 		question.setCategory(null);
 		related_category.getQuestions().remove(question);
@@ -217,5 +227,15 @@ public class QuestionServiceImpl implements QuestionService {
 	@Transactional
 	public Set<Question> loadQuestions() {
 		return questionDAO.findAllQuestions();
+	}
+
+	@Override
+	public List<Question> findNextGroupQuestions(Integer user) {
+		List<Question> list = questionDAO.executeQuery("select myQuestion from Question myQuestion "
+								+ "where myQuestion.id not in (select myAnswer.question.id from Answer myAnswer where myAnswer.user.id = ?1) "
+								+ "group by myQuestion.category.id order by myQuestion.id",
+								 user);
+		
+		return list;
 	}
 }

@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlType;
 		@NamedQuery(name = "findAllQuestions", query = "select myQuestion from Question myQuestion order by id desc"),
 		@NamedQuery(name = "findQuestionById", query = "select myQuestion from Question myQuestion where myQuestion.id = ?1"),
 		@NamedQuery(name = "findQuestionByPrimaryKey", query = "select myQuestion from Question myQuestion where myQuestion.id = ?1"),
+		@NamedQuery(name = "findQuestionByCategory", query = "select myQuestion from Question myQuestion where myQuestion.category.id = ?1"),
 		@NamedQuery(name = "findQuestionByQuestionField", query = "select myQuestion from Question myQuestion where myQuestion.questionField = ?1"),
 		@NamedQuery(name = "findQuestionByQuestionFieldContaining", query = "select myQuestion from Question myQuestion where myQuestion.questionField like ?1") })
 @Table(catalog = "trhy", name = "question")
